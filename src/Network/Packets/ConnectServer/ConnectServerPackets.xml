@@ -98,7 +98,7 @@
         <Structure>
           <Name>ServerLoadInfo</Name>
           <Description>Contains the id and the load of a server.</Description>
-          <Length>4</Length>
+          <Length>3</Length>
           <Fields>
             <Field>
               <Index>0</Index>

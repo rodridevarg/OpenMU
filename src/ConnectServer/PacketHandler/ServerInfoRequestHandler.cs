@@ -51,13 +51,16 @@ internal class ServerInfoRequestHandler : IPacketHandler<Client>
             && !isRunningOnDocker
             && isClientConnectedOnNonRegisteredAddress) // only if we can't use the cached data
         {
+            var ip = localIpEndPoint!.Address.ToString();
+            var port = (ushort)serverItem!.EndPoint.Port;
+            this._logger.LogInformation("Sending ConnectionInfo (live): {0}:{1} to client {2}:{3}", ip, port, client.Address, client.Port);
             int WritePacket()
             {
                 var data = client.Connection.Output.GetSpan(ConnectionInfoRef.Length)[..ConnectionInfoRef.Length];
                 _ = new ConnectionInfoRef(data)
                 {
-                    IpAddress = localIpEndPoint!.Address.ToString(),
-                    Port = (ushort)serverItem!.EndPoint.Port,
+                    IpAddress = ip,
+                    Port = port,
                 };
                 return data.Length;
             }
@@ -67,6 +70,8 @@ internal class ServerInfoRequestHandler : IPacketHandler<Client>
         else if (this._connectServer.ConnectInfos.TryGetValue(serverId, out var connectInfo))
         {
             // more optimal way, because the serialized data was cached.
+            var cached = new ConnectionInfo(connectInfo);
+            this._logger.LogInformation("Sending ConnectionInfo (cached): {0}:{1} to client {2}:{3}", cached.IpAddress, cached.Port, client.Address, client.Port);
 
             int WritePacket()
             {

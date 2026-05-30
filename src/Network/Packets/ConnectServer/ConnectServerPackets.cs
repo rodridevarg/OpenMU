@@ -470,7 +470,7 @@ public readonly struct ServerLoadInfo
     /// <summary>
     /// Gets the initial length of this data packet. When the size is dynamic, this value may be bigger than actually needed.
     /// </summary>
-    public static int Length => 4;
+    public static int Length => 3;
 
     /// <summary>
     /// Gets or sets the server id.
