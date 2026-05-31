@@ -61,6 +61,17 @@ internal partial class NpcInitialization
 
             this.ItemHelper.CreateItem(32, 10, 14, 1, 0), // Town Portal Scroll
             this.ItemHelper.CreateItem(33, 29, 13, 1, 0), // Armor of Guardsman
+
+            // Event Tickets (+1 to +3)
+            this.ItemHelper.CreateItem(34, 18, 13, 1, 1), // Blood Castle Ticket +1
+            this.ItemHelper.CreateItem(35, 18, 13, 1, 2), // Blood Castle Ticket +2
+            this.ItemHelper.CreateItem(36, 18, 13, 1, 3), // Blood Castle Ticket +3
+            this.ItemHelper.CreateItem(37, 19, 14, 1, 1), // Devil's Square Ticket +1
+            this.ItemHelper.CreateItem(38, 19, 14, 1, 2), // Devil's Square Ticket +2
+            this.ItemHelper.CreateItem(39, 19, 14, 1, 3), // Devil's Square Ticket +3
+            this.ItemHelper.CreateItem(40, 29, 13, 1, 1), // Chaos Castle Ticket +1
+            this.ItemHelper.CreateItem(41, 29, 13, 1, 2), // Chaos Castle Ticket +2
+            this.ItemHelper.CreateItem(42, 29, 13, 1, 3), // Chaos Castle Ticket +3
         };
 
         var storage = this.CreateMerchantStore(itemList);

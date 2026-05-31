@@ -23,7 +23,7 @@ The client shows the available servers with their load information.
 
 Contains the id and the load of a server.
 
-Length: 4 Bytes
+Length: 3 Bytes
 
 | Index | Length | Data Type | Value | Description |
 |-------|--------|-----------|-------|-------------|

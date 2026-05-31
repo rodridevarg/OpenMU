@@ -37,7 +37,7 @@ public abstract class GameConfigurationInitializerBase : InitializerBase
     /// <inheritdoc />
     public override void Initialize()
     {
-        this.GameConfiguration.ExperienceRate = 1.0f;
+        this.GameConfiguration.ExperienceRate = 100.0f;
         this.GameConfiguration.MinimumMonsterLevelForMasterExperience = 95;
         this.GameConfiguration.MaximumLevel = 400;
         this.GameConfiguration.MaximumMasterLevel = 200;
@@ -50,7 +50,7 @@ public abstract class GameConfigurationInitializerBase : InitializerBase
         this.GameConfiguration.ExcellentItemDropLevelDelta = 25;
         this.GameConfiguration.RecoveryInterval = 3000;
         this.GameConfiguration.MaximumLetters = 50;
-        this.GameConfiguration.LetterSendPrice = 1000;
+        this.GameConfiguration.LetterSendPrice = 50000;
         this.GameConfiguration.MaximumCharactersPerAccount = 5;
         this.GameConfiguration.CharacterNameRegex = "^[a-zA-Z0-9]{3,10}$";
         this.GameConfiguration.MaximumPasswordLength = 20;
@@ -58,9 +58,9 @@ public abstract class GameConfigurationInitializerBase : InitializerBase
         this.GameConfiguration.ShouldDropMoney = true;
         this.GameConfiguration.ItemDropDuration = TimeSpan.FromSeconds(60);
         this.GameConfiguration.MaximumItemOptionLevelDrop = 3;
-        this.GameConfiguration.DamagePerOneItemDurability = 2000;
-        this.GameConfiguration.DamagePerOnePetDurability = 100000;
-        this.GameConfiguration.HitsPerOneItemDurability = 10000;
+        this.GameConfiguration.DamagePerOneItemDurability = 4000;
+        this.GameConfiguration.DamagePerOnePetDurability = 200000;
+        this.GameConfiguration.HitsPerOneItemDurability = 5000;
 
         this.GameConfiguration.ExperienceFormula = "if(level == 0, 0, if(level < 256, 10 * (level + 8) * (level - 1) * (level - 1), (10 * (level + 8) * (level - 1) * (level - 1)) + (1000 * (level - 247) * (level - 256) * (level - 256))))";
         this.GameConfiguration.MasterExperienceFormula = "(505 * level * level * level) + (35278500 * level) + (228045 * level * level)";
@@ -139,9 +139,9 @@ public abstract class GameConfigurationInitializerBase : InitializerBase
     {
         var moneyDropItemGroup = this.Context.CreateNew<DropItemGroup>();
         moneyDropItemGroup.SetGuid(1);
-        moneyDropItemGroup.Chance = 0.5;
+        moneyDropItemGroup.Chance = 0.2;
         moneyDropItemGroup.ItemType = SpecialItemType.Money;
-        moneyDropItemGroup.Description = "The common money drop item group (50 % drop chance)";
+        moneyDropItemGroup.Description = "The common money drop item group (20 % drop chance)";
         this.GameConfiguration.DropItemGroups.Add(moneyDropItemGroup);
         BaseMapInitializer.RegisterDefaultDropItemGroup(moneyDropItemGroup);
 
@@ -168,9 +168,9 @@ public abstract class GameConfigurationInitializerBase : InitializerBase
 
         var jewelsDropItemGroup = this.Context.CreateNew<DropItemGroup>();
         jewelsDropItemGroup.SetGuid(4);
-        jewelsDropItemGroup.Chance = 0.001;
+        jewelsDropItemGroup.Chance = 0.0001;
         jewelsDropItemGroup.ItemType = SpecialItemType.Jewel;
-        jewelsDropItemGroup.Description = "The jewels drop item group (0.1 % drop chance)";
+        jewelsDropItemGroup.Description = "The jewels drop item group (0.01 % drop chance)";
         this.GameConfiguration.DropItemGroups.Add(jewelsDropItemGroup);
         BaseMapInitializer.RegisterDefaultDropItemGroup(jewelsDropItemGroup);
     }

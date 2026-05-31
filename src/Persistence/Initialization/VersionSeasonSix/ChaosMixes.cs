@@ -90,7 +90,7 @@ public class ChaosMixes : InitializerBase
         var craftingSettings = this.Context.CreateNew<SimpleCraftingSettings>();
 
         crafting.SimpleCraftingSettings = craftingSettings;
-        craftingSettings.Money = 2_000_000 * (targetLevel - 9);
+        craftingSettings.Money = 5_000_000 * (targetLevel - 9);
         craftingSettings.SuccessPercent = (byte)(60 - ((targetLevel - 10) / 2 * 5));
         craftingSettings.SuccessPercentageAdditionForLuck = 25;
         craftingSettings.SuccessPercentageAdditionForExcellentItem = -10;
@@ -149,7 +149,7 @@ public class ChaosMixes : InitializerBase
         chaosWeapon.ItemCraftingHandlerClassName = typeof(ChaosWeaponAndFirstWingsCrafting).FullName!;
         var chaosWeaponSettings = this.Context.CreateNew<SimpleCraftingSettings>();
         chaosWeapon.SimpleCraftingSettings = chaosWeaponSettings;
-        chaosWeaponSettings.MoneyPerFinalSuccessPercentage = 10_000;
+        chaosWeaponSettings.MoneyPerFinalSuccessPercentage = 50_000;
         chaosWeaponSettings.NpcPriceDivisor = 20_000;
 
         // Requirements:
@@ -215,7 +215,7 @@ public class ChaosMixes : InitializerBase
         crafting.ItemCraftingHandlerClassName = typeof(ChaosWeaponAndFirstWingsCrafting).FullName!;
         var craftingSettings = this.Context.CreateNew<SimpleCraftingSettings>();
         crafting.SimpleCraftingSettings = craftingSettings;
-        craftingSettings.MoneyPerFinalSuccessPercentage = 10_000;
+        craftingSettings.MoneyPerFinalSuccessPercentage = 50_000;
         craftingSettings.NpcPriceDivisor = 20_000;
 
         // Requirements:
@@ -292,7 +292,7 @@ public class ChaosMixes : InitializerBase
         crafting.ItemCraftingHandlerClassName = typeof(SecondWingsCrafting).FullName!;
         var craftingSettings = this.Context.CreateNew<SimpleCraftingSettings>();
         crafting.SimpleCraftingSettings = craftingSettings;
-        craftingSettings.Money = 5_000_000;
+        craftingSettings.Money = 25_000_000;
         craftingSettings.MaximumSuccessPercent = 90;
 
         // Requirements:
@@ -372,7 +372,7 @@ public class ChaosMixes : InitializerBase
         crafting.Number = 38;
         var craftingSettings = this.Context.CreateNew<SimpleCraftingSettings>();
         crafting.SimpleCraftingSettings = craftingSettings;
-        craftingSettings.MoneyPerFinalSuccessPercentage = 200_000;
+        craftingSettings.MoneyPerFinalSuccessPercentage = 1_000_000;
         craftingSettings.SuccessPercent = 1;
         craftingSettings.MaximumSuccessPercent = 60;
 
@@ -445,7 +445,7 @@ public class ChaosMixes : InitializerBase
         crafting.ItemCraftingHandlerClassName = typeof(ThirdWingsCrafting).FullName!;
         var craftingSettings = this.Context.CreateNew<SimpleCraftingSettings>();
         crafting.SimpleCraftingSettings = craftingSettings;
-        craftingSettings.MoneyPerFinalSuccessPercentage = 200_000;
+        craftingSettings.MoneyPerFinalSuccessPercentage = 1_000_000;
         craftingSettings.SuccessPercent = 1;
         craftingSettings.MaximumSuccessPercent = 40;
 
@@ -552,7 +552,7 @@ public class ChaosMixes : InitializerBase
         crafting.ItemCraftingHandlerClassName = typeof(SecondWingsCrafting).FullName!;
         var craftingSettings = this.Context.CreateNew<SimpleCraftingSettings>();
         crafting.SimpleCraftingSettings = craftingSettings;
-        craftingSettings.Money = 5_000_000;
+        craftingSettings.Money = 25_000_000;
         craftingSettings.MaximumSuccessPercent = 90;
 
         // Requirements:
@@ -624,7 +624,7 @@ public class ChaosMixes : InitializerBase
         fruitCrafting.Number = 6;
         var craftingSettings = this.Context.CreateNew<SimpleCraftingSettings>();
         fruitCrafting.SimpleCraftingSettings = craftingSettings;
-        craftingSettings.Money = 3_000_000;
+        craftingSettings.Money = 15_000_000;
         craftingSettings.SuccessPercent = 90;
 
         // Requirements:
@@ -745,7 +745,7 @@ public class ChaosMixes : InitializerBase
         crafting.ItemCraftingHandlerClassName = typeof(DinorantCrafting).FullName!;
         var craftingSettings = this.Context.CreateNew<SimpleCraftingSettings>();
         crafting.SimpleCraftingSettings = craftingSettings;
-        craftingSettings.Money = 500_000;
+        craftingSettings.Money = 2_500_000;
         craftingSettings.SuccessPercent = 70;
 
         // Requirements:
