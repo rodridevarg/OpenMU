@@ -90,6 +90,13 @@ public class EntityDataContext : ExtendedTypeContext
         modelBuilder.Entity<QuestDefinition>().Apply();
         modelBuilder.Entity<WarpInfo>().Apply();
 
+        // Economy entities:
+        modelBuilder.Entity<EconomyTransaction>();
+        modelBuilder.Entity<MarketPriceSnapshot>();
+        modelBuilder.Entity<CharacterPatrimony>();
+        modelBuilder.Entity<SystemBank>();
+        modelBuilder.Entity<ReferencePrice>();
+
         // join entity keys:
         this.AddJoinDefinitions(modelBuilder);
 

@@ -40,7 +40,7 @@ public class SoulJewelConsumeHandlerPlugIn : UpgradeItemLevelJewelConsumeHandler
     public override object CreateDefaultConfig() => new UpgradeItemLevelConfiguration
     {
         MaximumLevel = 8,
-        MinimumLevel = 0,
+        MinimumLevel = 6,
         SuccessRatePercentage = 50,
         SuccessRateBonusWithLuckPercentage = 25,
         ResetToLevel0WhenFailMinLevel = 7,
