@@ -65,18 +65,43 @@ public class EntregarChatCommandPlugIn : IChatCommandPlugIn
                 return;
             }
 
-            // Add items to vault
+            // Add items to vault — find real free slots
+            var usedSlots = targetAccount.Vault.Items.Select(i => (int)i.ItemSlot).ToHashSet();
+            var vaultSize = targetAccount.IsVaultExtended ? 192 : 96;
+            var maxSlot = vaultSize - 1;
             var added = 0;
-            for (var i = 0; i < quantity; i++)
+
+            for (var i = 0; i < quantity && added < quantity; i++)
             {
+                var freeSlot = Enumerable.Range(0, maxSlot + 1)
+                    .Where(s => !usedSlots.Contains(s))
+                    .DefaultIfEmpty(-1)
+                    .First();
+
+                if (freeSlot < 0)
+                {
+                    await player.ShowBlueMessageAsync($"Vault lleno. Se entregaron {added}x {itemName}.").ConfigureAwait(false);
+                    break;
+                }
+
                 var newItem = context.CreateNew<Item>();
                 newItem.Definition = itemDef;
-                newItem.Durability = 1;
-                newItem.ItemSlot = (byte)(targetAccount.Vault.Items.Count + i);
+                newItem.Durability = itemDef.Durability;
+                newItem.ItemSlot = (byte)freeSlot;
                 targetAccount.Vault.Items.Add(newItem);
+                usedSlots.Add(freeSlot);
                 added++;
             }
 
+            await context.SaveChangesAsync().ConfigureAwait(false);
+
+            // Audit admin delivery
+            var deliveryLog = context.CreateNew<EconomyTransaction>();
+            deliveryLog.Timestamp = DateTime.UtcNow;
+            deliveryLog.TransactionType = EconomyTransactionType.AdminDelivery;
+            deliveryLog.ItemName = itemName;
+            deliveryLog.Quantity = added;
+            deliveryLog.PriceZen = 0;
             await context.SaveChangesAsync().ConfigureAwait(false);
 
             await player.ShowBlueMessageAsync($"Entregado: {added}x {itemName} al vault de {accountName}.").ConfigureAwait(false);

@@ -46,9 +46,19 @@ public class EconomyTransaction
     public EconomyTransactionType TransactionType { get; set; }
 
     /// <summary>
+    /// Gets or sets the seller character id.
+    /// </summary>
+    public Guid? SellerId { get; set; }
+
+    /// <summary>
     /// Gets or sets the seller character (null for NPC/admin).
     /// </summary>
     public virtual Character? Seller { get; set; }
+
+    /// <summary>
+    /// Gets or sets the buyer character id.
+    /// </summary>
+    public Guid? BuyerId { get; set; }
 
     /// <summary>
     /// Gets or sets the buyer character (null for admin sinks).

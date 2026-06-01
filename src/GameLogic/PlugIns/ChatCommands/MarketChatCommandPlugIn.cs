@@ -33,9 +33,10 @@ public class MarketChatCommandPlugIn : IChatCommandPlugIn
             var last24h = now.AddHours(-24);
             var prev24h = now.AddHours(-48);
 
-            // Get transactions for last 24h and previous 24h
+            // Get transactions for last 24h and previous 24h (limit to last 50 for performance)
             var allTransactions = (await context.GetAsync<EconomyTransaction>().ConfigureAwait(false))
                 .Where(t => t.Timestamp >= prev24h && t.PriceZen.HasValue && t.PriceZen.Value > 0)
+                .Take(50)
                 .ToList();
 
             var recent = allTransactions.Where(t => t.Timestamp >= last24h).ToList();
