@@ -32,16 +32,16 @@ public class BetaStartingPackPlugin : ICharacterCreatedPlugIn
         // Determine set number based on character class
         byte setNumber = createdCharacter.CharacterClass?.Number switch
         {
-            // Dark Knight / Blade Knight / BladeMaster -> Dragon Set
-            0 or 2 or 3 => 1,
             // Dark Wizard / SoulMaster / GrandMaster -> Legendary Set
-            4 or 6 or 7 => 3,
+            0 or 2 or 3 => 3,
+            // Dark Knight / Blade Knight / BladeMaster -> Dragon Set
+            4 or 6 or 7 => 1,
             // FairyElf / MuseElf / HighElf -> Guardian Set
             8 or 10 or 11 => 14,
             // MagicGladiator / DuelMaster -> Brave Set
             12 or 13 => 46,
-            // DarkLord / LordEmperor -> Valiant Set
-            16 or 17 => 37,
+            // DarkLord / LordEmperor -> Dark Master Set (classic complete)
+            16 or 17 => 28,
             // Summoner / BloodySummoner / DimensionMaster -> Red Wing Set
             20 or 22 or 23 => 40,
             // RageFighter / FistMaster -> Hades Set
@@ -52,11 +52,11 @@ public class BetaStartingPackPlugin : ICharacterCreatedPlugIn
 
         var setName = createdCharacter.CharacterClass?.Number switch
         {
-            0 or 2 or 3 => "Dragon",
-            4 or 6 or 7 => "Legendary",
+            0 or 2 or 3 => "Legendary",
+            4 or 6 or 7 => "Dragon",
             8 or 10 or 11 => "Guardian",
             12 or 13 => "Brave",
-            16 or 17 => "Valiant",
+            16 or 17 => "Dark Master",
             20 or 22 or 23 => "Red Wing",
             24 or 25 => "Hades",
             _ => "Leather"
