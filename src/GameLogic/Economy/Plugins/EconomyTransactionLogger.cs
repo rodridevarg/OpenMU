@@ -6,6 +6,7 @@ namespace MUnique.OpenMU.GameLogic.Economy;
 
 using System.Runtime.InteropServices;
 using MUnique.OpenMU.GameLogic.PlugIns;
+using MUnique.OpenMU.Persistence;
 using MUnique.OpenMU.PlugIns;
 
 /// <summary>
@@ -18,12 +19,19 @@ public class EconomyTransactionLogger : IItemSoldToOtherPlayerPlugIn, IItemTrade
     /// <inheritdoc />
     public void ItemSold(Player seller, Item item, Player buyer)
     {
+        var sellerId = seller.SelectedCharacter?.Id;
+        var buyerId = buyer.SelectedCharacter?.Id;
+        var itemName = item.Definition?.Name ?? "Unknown";
+        var price = item.StorePrice;
+        var contextProvider = seller.GameContext.PersistenceContextProvider;
+
         _ = this.LogTransactionAsync(
             EconomyTransactionType.PersonalStore,
-            seller,
-            buyer,
-            item,
-            item.StorePrice);
+            contextProvider,
+            sellerId,
+            buyerId,
+            itemName,
+            price);
     }
 
     /// <inheritdoc />
@@ -34,39 +42,44 @@ public class EconomyTransactionLogger : IItemSoldToOtherPlayerPlugIn, IItemTrade
             return;
         }
 
+        var sellerId = seller.SelectedCharacter?.Id;
+        var buyerId = buyer.SelectedCharacter?.Id;
+        var itemName = item.Definition?.Name ?? "Unknown";
+        var contextProvider = seller.GameContext.PersistenceContextProvider;
+
         _ = this.LogTransactionAsync(
             EconomyTransactionType.DirectTrade,
-            seller,
-            buyer,
-            item,
+            contextProvider,
+            sellerId,
+            buyerId,
+            itemName,
             null);
     }
 
     private async Task LogTransactionAsync(
         EconomyTransactionType type,
-        Player seller,
-        Player buyer,
-        Item item,
+        IPersistenceContextProvider contextProvider,
+        Guid? sellerId,
+        Guid? buyerId,
+        string itemName,
         int? priceZen)
     {
         try
         {
-            using var context = seller.GameContext.PersistenceContextProvider.CreateNewContext();
+            using var context = contextProvider.CreateNewContext();
 
             var transaction = context.CreateNew<EconomyTransaction>();
             transaction.Timestamp = DateTime.UtcNow;
             transaction.TransactionType = type;
-            transaction.Seller = seller.SelectedCharacter;
-            transaction.Buyer = buyer.SelectedCharacter;
-            transaction.ItemName = item.Definition?.Name ?? "Unknown";
+            transaction.ItemName = itemName;
             transaction.Quantity = 1;
             transaction.PriceZen = priceZen;
 
             await context.SaveChangesAsync().ConfigureAwait(false);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            seller.Logger.LogError(ex, "Failed to log economy transaction.");
+            // Silently fail — economy logging must never break the game
         }
     }
 }

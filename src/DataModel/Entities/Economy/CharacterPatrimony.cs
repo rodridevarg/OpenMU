@@ -15,10 +15,15 @@ public class CharacterPatrimony
     public DateTime SnapshotTime { get; set; } = DateTime.UtcNow;
 
     /// <summary>
+    /// Gets or sets the character id.
+    /// </summary>
+    public Guid CharacterId { get; set; }
+
+    /// <summary>
     /// Gets or sets the character.
     /// </summary>
     [Required]
-    public virtual Character? Character { get; set; }
+    public virtual Character Character { get; set; } = null!;
 
     /// <summary>
     /// Gets or sets the total patrimony value in reference points (Zen-equivalent).

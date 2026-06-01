@@ -17,14 +17,6 @@ public class PatrimonioChatCommandPlugIn : IChatCommandPlugIn
 {
     private const string Command = "/patrimonio";
 
-    private static readonly Dictionary<string, string> JewelNames = new(StringComparer.OrdinalIgnoreCase)
-    {
-        { "bless", "Jewel of Bless" },
-        { "soul", "Jewel of Soul" },
-        { "life", "Jewel of Life" },
-        { "chaos", "Jewel of Chaos" },
-    };
-
     /// <inheritdoc />
     public string Key => Command;
 
@@ -78,6 +70,22 @@ public class PatrimonioChatCommandPlugIn : IChatCommandPlugIn
             await player.ShowBlueMessageAsync($"Life: {lifeCount} ({lifeCount * lifePrice:N1} pts)").ConfigureAwait(false);
             await player.ShowBlueMessageAsync($"Chaos: {chaosCount} ({chaosCount * chaosPrice:N1} pts)").ConfigureAwait(false);
             await player.ShowBlueMessageAsync($"TOTAL: {total:N1} puntos").ConfigureAwait(false);
+
+            // Persist snapshot
+            var patrimony = context.CreateNew<CharacterPatrimony>();
+            patrimony.SnapshotTime = DateTime.UtcNow;
+            patrimony.Character = character;
+            patrimony.ZenValue = zenValue;
+            patrimony.BlessCount = blessCount;
+            patrimony.BlessValue = blessCount * blessPrice;
+            patrimony.SoulCount = soulCount;
+            patrimony.SoulValue = soulCount * soulPrice;
+            patrimony.LifeCount = lifeCount;
+            patrimony.LifeValue = lifeCount * lifePrice;
+            patrimony.ChaosCount = chaosCount;
+            patrimony.ChaosValue = chaosCount * chaosPrice;
+            patrimony.TotalPatrimony = total;
+            await context.SaveChangesAsync().ConfigureAwait(false);
         }
         catch (Exception ex)
         {

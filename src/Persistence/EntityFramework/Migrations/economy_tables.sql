@@ -6,7 +6,7 @@
 CREATE TABLE IF NOT EXISTS data."EconomyTransaction" (
     "Id" uuid PRIMARY KEY DEFAULT gen_random_uuid(),
     "Timestamp" timestamptz NOT NULL DEFAULT now(),
-    "TransactionType" varchar(50) NOT NULL,
+    "TransactionType" int NOT NULL,
     "SellerId" uuid,
     "BuyerId" uuid,
     "ItemName" varchar(255) NOT NULL,
