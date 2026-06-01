@@ -23,4 +23,17 @@ internal class LostTower : Version075.Maps.LostTower
 
     /// <inheritdoc />
     protected override string TerrainVersionPrefix => string.Empty;
+
+    /// <inheritdoc />
+    protected override IEnumerable<MonsterSpawnArea> CreateMonsterSpawns()
+    {
+        foreach (var spawn in base.CreateMonsterSpawns())
+        {
+            yield return spawn;
+        }
+
+        // Beta spots - hard to find (normal quantity)
+        yield return this.CreateMonsterSpawn(900, this.NpcDictionary[37], 5, 15, 5, 15, 4); // Devil x4
+        yield return this.CreateMonsterSpawn(901, this.NpcDictionary[41], 225, 235, 235, 245, 6); // Death Cow x6
+    }
 }

@@ -34,4 +34,17 @@ internal class Atlans : Version075.Maps.Atlans
 
         yield return this.CreateMonsterSpawn(10, this.NpcDictionary[229], 17, 35, Direction.SouthEast, SpawnTrigger.Wandering); // Marlon
     }
+
+    /// <inheritdoc />
+    protected override IEnumerable<MonsterSpawnArea> CreateMonsterSpawns()
+    {
+        foreach (var spawn in base.CreateMonsterSpawns())
+        {
+            yield return spawn;
+        }
+
+        // Beta spots - hard to find (normal quantity)
+        yield return this.CreateMonsterSpawn(900, this.NpcDictionary[48], 195, 205, 195, 205, 2); // Lizard King x2
+        yield return this.CreateMonsterSpawn(901, this.NpcDictionary[52], 175, 185, 45, 55, 4); // Silver Valkyrie x4
+    }
 }

@@ -23,4 +23,17 @@ internal class Dungeon : Version075.Maps.Dungeon
 
     /// <inheritdoc/>
     protected override string TerrainVersionPrefix => string.Empty;
+
+    /// <inheritdoc/>
+    protected override IEnumerable<MonsterSpawnArea> CreateMonsterSpawns()
+    {
+        foreach (var spawn in base.CreateMonsterSpawns())
+        {
+            yield return spawn;
+        }
+
+        // Beta spots - hard to find (normal quantity)
+        yield return this.CreateMonsterSpawn(900, this.NpcDictionary[10], 10, 20, 215, 225, 6); // Dark Knight x6
+        yield return this.CreateMonsterSpawn(901, this.NpcDictionary[11], 45, 55, 175, 185, 8); // Ghost x8
+    }
 }

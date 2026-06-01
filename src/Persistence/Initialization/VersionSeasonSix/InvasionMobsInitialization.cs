@@ -254,7 +254,7 @@ internal class InvasionMobsInitialization : Version095d.InvasionMobsInitializati
 
             var itemDrop = this.Context.CreateNew<DropItemGroup>();
 
-            itemDrop.Chance = 1;
+            itemDrop.Chance = 0.07f;
             itemDrop.Description = "Items from red dragon";
             itemDrop.Monster = monster;
             itemDrop.PossibleItems.Add(this.GameConfiguration.Items.First(item => item.Group == 14 && item.Number == 13)); // Jewel of Bless

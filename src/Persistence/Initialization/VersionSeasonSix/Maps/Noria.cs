@@ -38,4 +38,16 @@ internal class Noria : Version095d.Maps.Noria
         yield return this.CreateMonsterSpawn(13, this.NpcDictionary[451], 179, 129, Direction.SouthEast);
         yield return this.CreateMonsterSpawn(14, this.NpcDictionary[229], 169, 88, Direction.SouthEast, SpawnTrigger.Wandering); // Marlon
     }
+
+    /// <inheritdoc/>
+    protected override IEnumerable<MonsterSpawnArea> CreateMonsterSpawns()
+    {
+        foreach (var spawn in base.CreateMonsterSpawns())
+        {
+            yield return spawn;
+        }
+
+        // Beta spots - easy to find (x3 quantity)
+        yield return this.CreateMonsterSpawn(900, this.NpcDictionary[32], 35, 65, 70, 130, 24); // Stone Golem x24
+    }
 }

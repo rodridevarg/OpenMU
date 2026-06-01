@@ -46,4 +46,16 @@ internal class Devias : Version095d.Maps.Devias
         yield return this.CreateMonsterSpawn(41, this.NpcDictionary[233], 217, 20, Direction.SouthEast);
         yield return this.CreateMonsterSpawn(42, this.NpcDictionary[568], 225, 52, Direction.South, SpawnTrigger.Wandering); // Wandering Merchant Zyro
     }
+
+    /// <inheritdoc/>
+    protected override IEnumerable<MonsterSpawnArea> CreateMonsterSpawns()
+    {
+        foreach (var spawn in base.CreateMonsterSpawns())
+        {
+            yield return spawn;
+        }
+
+        // Beta spots - easy to find (x3 quantity)
+        yield return this.CreateMonsterSpawn(900, this.NpcDictionary[20], 185, 215, 190, 230, 30); // Elite Yeti x30
+    }
 }

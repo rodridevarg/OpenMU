@@ -45,4 +45,18 @@ internal class Lorencia : Version095d.Maps.Lorencia
         yield return this.CreateMonsterSpawn(26, this.NpcDictionary[568], 131, 139, Direction.South, SpawnTrigger.Wandering); // Wandering Merchant Zyro
         yield return this.CreateMonsterSpawn(27, this.NpcDictionary[546], 128, 112, Direction.SouthEast); // Cambista
     }
+
+    /// <inheritdoc/>
+    protected override IEnumerable<MonsterSpawnArea> CreateMonsterSpawns()
+    {
+        foreach (var spawn in base.CreateMonsterSpawns())
+        {
+            yield return spawn;
+        }
+
+        // Beta spots - easy to find (x3 quantity)
+        yield return this.CreateMonsterSpawn(900, this.NpcDictionary[44], 120, 130, 125, 140, 6); // Red Dragon x6
+        yield return this.CreateMonsterSpawn(901, this.NpcDictionary[7], 130, 150, 150, 170, 15); // Giant x15
+        yield return this.CreateMonsterSpawn(902, this.NpcDictionary[14], 150, 170, 115, 125, 15); // Skeleton Warrior x15
+    }
 }
